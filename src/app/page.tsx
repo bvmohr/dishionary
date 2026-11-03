@@ -11,8 +11,8 @@ import {
   Check,
   PanelLeft,
 } from "lucide-react";
-import { DishionaryLogo } from "@/components/brand/dishionary-logo";
-import { ThemeToggle } from "@/components/layout/theme-toggle";
+import { PublicHeader } from "@/components/layout/public-header";
+import { PublicFooter } from "@/components/layout/public-footer";
 import { formatDuration } from "@/lib/utils";
 
 const sampleSidebarRecipes = [
@@ -89,72 +89,25 @@ export default function HomePage() {
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
       {/* Top Navigation */}
-      <header className="sticky top-0 z-30 border-b border-border bg-background/95 backdrop-blur-xs">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <Link href="/" aria-label="Dishionary Home">
-            <DishionaryLogo size="md" />
-          </Link>
-
-          <nav
-            aria-label="Primary Navigation"
-            className="hidden items-center gap-8 text-sm font-medium text-muted-foreground md:flex"
-          >
-            <a
-              href="#features"
-              className="transition-colors hover:text-foreground"
-            >
-              Features
-            </a>
-            <a
-              href="#preview"
-              className="transition-colors hover:text-foreground"
-            >
-              Cookbook Reader
-            </a>
-            <a
-              href="#portability"
-              className="transition-colors hover:text-foreground"
-            >
-              Export &amp; Import
-            </a>
-          </nav>
-
-          <div className="flex items-center gap-3">
-            <ThemeToggle />
-            <Link
-              href="/login"
-              className="hidden rounded-lg border border-border bg-surface px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-surface-muted sm:inline-flex"
-            >
-              Sign In
-            </Link>
-            <Link
-              href="/register"
-              className="inline-flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary-hover"
-            >
-              <span>Start Your Cookbook</span>
-              <ArrowRight className="h-4 w-4" strokeWidth={1.75} />
-            </Link>
-          </div>
-        </div>
-      </header>
+      <PublicHeader />
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="mx-auto max-w-7xl px-4 pt-14 pb-16 sm:px-6 md:pt-20 lg:px-8">
+        <section className="mx-auto max-w-7xl px-4 pt-10 pb-14 sm:px-6 sm:pt-14 sm:pb-16 md:pt-20 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3.5 py-1.5 text-xs font-medium text-muted-foreground">
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3.5 py-1.5 text-xs font-medium text-muted-foreground sm:mb-6">
               <BookOpen
-                className="h-3.5 w-3.5 text-primary"
+                className="h-3.5 w-3.5 shrink-0 text-primary"
                 strokeWidth={1.75}
               />
               <span>Crafted for Home Cooks &amp; Culinary Curators</span>
             </div>
 
-            <h1 className="font-serif text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+            <h1 className="font-serif text-3xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
               Your personal recipes, beautifully typeset and ready to cook.
             </h1>
 
-            <p className="mt-6 text-base leading-relaxed text-muted-foreground sm:text-lg">
+            <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:mt-6 sm:text-lg">
               Dishionary combines structured form inputs with clean Markdown
               formatting, giving you an independent cookbook with Grid and List
               views, a conversation-style recipe switcher, and one-click recipe
@@ -181,23 +134,23 @@ export default function HomePage() {
           {/* Interactive Architectural Preview of the Cookbook Split View */}
           <div
             id="preview"
-            className="mt-14 overflow-hidden rounded-2xl border border-border bg-surface shadow-sm"
+            className="mt-12 overflow-hidden rounded-2xl border border-border bg-surface shadow-sm sm:mt-14"
           >
             {/* Mock Window Bar */}
-            <div className="flex items-center justify-between border-b border-border bg-surface-muted px-4 py-3">
-              <div className="flex items-center gap-2">
-                <span className="h-2.5 w-2.5 rounded-full bg-border" />
-                <span className="h-2.5 w-2.5 rounded-full bg-border" />
-                <span className="h-2.5 w-2.5 rounded-full bg-border" />
-                <span className="ml-2 font-mono text-xs text-muted-foreground">
+            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border bg-surface-muted px-3.5 py-2.5 sm:px-4 sm:py-3">
+              <div className="flex min-w-0 items-center gap-1.5 sm:gap-2">
+                <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-border" />
+                <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-border" />
+                <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-border" />
+                <span className="ml-1.5 truncate font-mono text-xs text-muted-foreground">
                   /cookbook/herb-crusted-rack-of-lamb
                 </span>
               </div>
-              <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                <span className="rounded-md border border-border bg-surface px-2.5 py-1 font-medium text-foreground">
+              <div className="flex shrink-0 items-center gap-1.5 text-xs text-muted-foreground sm:gap-2">
+                <span className="rounded-md border border-border bg-surface px-2 py-0.5 font-medium text-foreground sm:px-2.5 sm:py-1">
                   Quick View
                 </span>
-                <span className="rounded-md bg-primary px-2.5 py-1 font-medium text-primary-foreground">
+                <span className="rounded-md bg-primary px-2 py-0.5 font-medium text-primary-foreground sm:px-2.5 sm:py-1">
                   Fullscreen Reader
                 </span>
               </div>
@@ -241,7 +194,7 @@ export default function HomePage() {
               </aside>
 
               {/* Main Scrollable Recipe Canvas */}
-              <div className="p-6 sm:p-8 md:col-span-8 lg:col-span-9">
+              <div className="p-5 sm:p-8 md:col-span-8 lg:col-span-9">
                 <div className="flex flex-wrap items-center justify-between gap-4 border-b border-border pb-6">
                   <div>
                     <span className="inline-flex items-center rounded-md bg-secondary-accent/15 px-2.5 py-1 text-xs font-medium text-secondary-accent">
@@ -256,7 +209,7 @@ export default function HomePage() {
                     </p>
                   </div>
 
-                  <div className="flex items-center gap-4 rounded-xl border border-border bg-surface-muted px-4 py-2.5 font-mono text-xs">
+                  <div className="flex w-full items-center justify-around gap-3 rounded-xl border border-border bg-surface-muted px-4 py-2.5 font-mono text-xs sm:w-auto sm:justify-start sm:gap-4">
                     <div>
                       <span className="block text-muted-foreground">PREP</span>
                       <span className="font-semibold text-foreground">
@@ -332,7 +285,7 @@ export default function HomePage() {
                         Rendered via Markdown
                       </span>
                     </div>
-                    <div className="mt-3 space-y-4 rounded-xl border border-border bg-surface-muted/30 p-5 text-sm leading-relaxed text-foreground">
+                    <div className="mt-3 space-y-4 rounded-xl border border-border bg-surface-muted/30 p-4 text-sm leading-relaxed text-foreground sm:p-5">
                       <div>
                         <h4 className="font-serif text-base font-semibold">
                           1. Temper &amp; Sear the Lamb
@@ -376,20 +329,20 @@ export default function HomePage() {
         {/* Feature Grid */}
         <section
           id="features"
-          className="border-t border-border bg-surface-muted/40 py-16 sm:py-20"
+          className="border-t border-border bg-surface-muted/40 py-14 sm:py-20"
         >
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="max-w-2xl">
               <span className="font-mono text-xs font-semibold tracking-wider text-primary uppercase">
                 Built for Clarity
               </span>
-              <h2 className="mt-2 font-serif text-3xl font-semibold text-foreground sm:text-4xl">
+              <h2 className="mt-2 font-serif text-2xl font-semibold text-foreground sm:text-4xl">
                 Everything a serious home cookbook needs—nothing it
                 doesn&apos;t.
               </h2>
             </div>
 
-            <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-10 grid grid-cols-1 gap-5 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
               {featureHighlights.map((feature) => {
                 const Icon = feature.icon;
                 return (
@@ -418,15 +371,15 @@ export default function HomePage() {
         {/* Portability Callout */}
         <section
           id="portability"
-          className="border-t border-border bg-background py-16 sm:py-20"
+          className="border-t border-border bg-background py-14 sm:py-20"
         >
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 items-center gap-10 rounded-2xl border border-border bg-surface p-8 sm:p-12 lg:grid-cols-12">
+            <div className="grid grid-cols-1 items-center gap-8 rounded-2xl border border-border bg-surface p-6 sm:gap-10 sm:p-12 lg:grid-cols-12">
               <div className="lg:col-span-7">
                 <span className="font-mono text-xs font-semibold tracking-wider text-secondary-accent uppercase">
                   Open Recipe Exchange
                 </span>
-                <h2 className="mt-2 font-serif text-3xl font-semibold text-foreground">
+                <h2 className="mt-2 font-serif text-2xl font-semibold text-foreground sm:text-3xl">
                   Share recipes across cookbooks without losing formatting or
                   photos.
                 </h2>
@@ -441,7 +394,7 @@ export default function HomePage() {
                   cookbook.
                 </p>
               </div>
-              <div className="lg:col-span-5">
+              <div className="min-w-0 lg:col-span-5">
                 <pre className="overflow-x-auto rounded-xl border border-border bg-surface-muted p-4 font-mono text-xs leading-relaxed text-foreground">
                   {`{
   "schemaVersion": "1.0",
@@ -462,15 +415,7 @@ export default function HomePage() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-border bg-surface py-10">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 sm:flex-row sm:px-6 lg:px-8">
-          <DishionaryLogo size="sm" />
-          <p className="text-xs text-muted-foreground">
-            Designed with warm editorial typography &amp; crisp SVG
-            craftsmanship.
-          </p>
-        </div>
-      </footer>
+      <PublicFooter />
     </div>
   );
 }

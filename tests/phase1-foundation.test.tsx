@@ -1,8 +1,9 @@
 import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import React from "react";
 import { cn, formatDuration } from "@/lib/utils";
 import { DishionaryLogo } from "@/components/brand/dishionary-logo";
+import { PublicHeader } from "@/components/layout/public-header";
 import HomePage from "@/app/page";
 
 describe("Phase 1 Foundation & Design System", () => {
@@ -71,6 +72,24 @@ describe("Phase 1 Foundation & Design System", () => {
       // Strict guardrail: verify zero emoji characters in rendered text
       const emojiRegex = /\p{Extended_Pictographic}/u;
       expect(emojiRegex.test(container.textContent || "")).toBe(false);
+    });
+  });
+
+  describe("<PublicHeader /> mobile navigation menu", () => {
+    it("toggles the collapsible mobile navigation drawer when the menu button is clicked", () => {
+      render(<PublicHeader />);
+      const toggleBtn = screen.getByRole("button", {
+        name: /open navigation menu/i,
+      });
+      expect(toggleBtn).toHaveAttribute("aria-expanded", "false");
+
+      fireEvent.click(toggleBtn);
+      expect(
+        screen.getByRole("button", { name: /close navigation menu/i })
+      ).toHaveAttribute("aria-expanded", "true");
+      expect(
+        screen.getByRole("navigation", { name: /mobile navigation/i })
+      ).toBeInTheDocument();
     });
   });
 });
