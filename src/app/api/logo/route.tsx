@@ -1,7 +1,5 @@
 import { ImageResponse } from "next/og";
 
-export const runtime = "edge";
-
 /**
  * Generates a high-resolution PNG of the Dishionary emblem at /api/logo
  * so Gmail, Apple Mail, Outlook, and Google OAuth consent screens can display
