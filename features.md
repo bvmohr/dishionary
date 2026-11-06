@@ -1,6 +1,6 @@
 # Dishionary — Feature Specifications & User Stories
 
-> **Document Status:** Living Document (v1.1.0 — Phase 1 Complete)  
+> **Document Status:** Living Document (v1.2.0 — Phase 2 Complete)  
 > **Last Updated:** 2026-11-03
 
 ---
@@ -172,8 +172,8 @@
 | :--------- | :------------------------------------------------------------ | :------- | :----------- | :------------ | :----------- |
 | **F-01**   | Warm Design System, Custom SVG Logo & Light/Dark Mode         | P0       | Phase 1      | **Completed** | Yes          |
 | **F-02**   | Public Landing Page & Responsive App Shell                    | P0       | Phase 1      | **Completed** | Yes          |
-| **F-03**   | Email/Password Auth, Google OIDC & Protected Routes           | P0       | Phase 2      | Pending       | Yes          |
-| **F-04**   | Email Verification & Password Recovery Flows                  | P0       | Phase 2      | Pending       | Yes          |
+| **F-03**   | Email/Password Auth, Google OIDC & Protected Routes           | P0       | Phase 2      | **Completed** | Yes          |
+| **F-04**   | Email Verification & Password Recovery Flows                  | P0       | Phase 2      | **Completed** | Yes          |
 | **F-05**   | Recipe CRUD (Create, Read, Update, Delete) & DB RLS           | P0       | Phase 3      | Pending       | Yes          |
 | **F-06**   | Hybrid Recipe Form (Structured Inputs + Markdown Editor)      | P0       | Phase 3      | Pending       | Yes          |
 | **F-07**   | Recipe Image Upload (Supabase Storage) & External URL Support | P0       | Phase 3      | Pending       | Yes          |

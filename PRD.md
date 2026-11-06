@@ -1,6 +1,6 @@
 # Dishionary — Product Requirements Document (PRD)
 
-> **Document Status:** Living Document (v1.1.0 — Phase 1 Complete)  
+> **Document Status:** Living Document (v1.2.0 — Phase 2 Complete)  
 > **Last Updated:** 2026-11-03  
 > **Target Branching Strategy:** `dev` (Feature Development & Integration) -> `main` (Production Deployment via Vercel CI/CD)
 
@@ -200,17 +200,18 @@ Establishing the design tokens, typography, testing harness, and CI pipeline in 
 
 ---
 
-### Phase 2: Database Schema, Supabase Auth, Google OIDC & Transactional Emails
+### Phase 2: Database Schema, Supabase Auth, Google OIDC & Transactional Emails (Completed)
 
+**Status:** `[x] Complete`  
 **Objective:** Configure Supabase PostgreSQL with Drizzle ORM, enforce Row-Level Security (RLS), and implement secure user authentication (Email/Password + Google OIDC) with email verification and password reset flows.
 
 #### Deliverables
 
-1. Drizzle ORM configuration (`drizzle.config.ts`) and schema definitions (`profiles`, `recipes`, `collections`, `recipe_collections`, `shared_recipe_links`) + SQL migration scripts including RLS policies.
-2. Supabase SSR client utilities (`lib/supabase/server.ts`, `lib/supabase/client.ts`, `middleware.ts`) protecting `/dashboard`, `/cookbook/*`, and `/settings`.
-3. Authentication pages: `/login`, `/register`, `/forgot-password`, `/reset-password`, `/verify-email`, and `/auth/callback` (handling OIDC & email confirmation code exchange).
-4. Transactional email notification templates and service helper (`lib/email/notifications.ts`) for account verification and security updates.
-5. Unit tests for auth validation schemas (Zod) and route protection middleware logic.
+1. [x] Drizzle ORM configuration (`drizzle.config.ts`), schema definitions (`profiles`, `recipes`, `collections`, `recipe_collections`, `shared_recipe_links`), and automated SQL migration runner (`src/db/migrate.ts` + `src/db/migrations/0000_init_schema_and_rls.sql`) including RLS policies and auth trigger.
+2. [x] Supabase SSR client utilities (`lib/supabase/server.ts`, `lib/supabase/client.ts`, `lib/supabase/middleware.ts`, `src/proxy.ts`) protecting `/dashboard`, `/cookbook/*`, and `/settings`.
+3. [x] Authentication pages: `/login`, `/register`, `/forgot-password`, `/reset-password`, `/verify-email`, and `/auth/callback` (handling OIDC & email confirmation code exchange).
+4. [x] Transactional email notification templates and service helper (`lib/email/notifications.ts`) via Resend with inline CID logo embedding (`src/app/api/logo/route.tsx`) and browser SVG favicon (`src/app/icon.svg`).
+5. [x] Unit tests (`tests/phase2-auth-db.test.tsx` — 20 total passing tests) for auth validation schemas (Zod), Drizzle schema tables, transactional email HTML builder, auth UI views, and route protection logic.
 
 #### Why This Approach Was Chosen
 
