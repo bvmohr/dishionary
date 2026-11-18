@@ -1,7 +1,7 @@
 # Dishionary — Security, Authentication & Privacy Specification
 
-> **Document Status:** Living Document (v1.2.0 — Phase 2 Complete)  
-> **Last Updated:** 2026-11-03
+> **Document Status:** Living Document (v1.3.0 — Phase 3 Complete)  
+> **Last Updated:** 2026-11-17
 
 ---
 

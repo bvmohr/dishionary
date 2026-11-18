@@ -191,3 +191,49 @@ CREATE POLICY "Users can manage their own shared recipe links"
   USING (auth.uid() = created_by)
   WITH CHECK (auth.uid() = created_by);
 
+-- ============================================================================
+-- Phase 3: Supabase Storage Bucket (`recipe-images`) & Storage RLS Policies
+-- ============================================================================
+INSERT INTO storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+VALUES (
+  'recipe-images',
+  'recipe-images',
+  true,
+  5242880,
+  ARRAY['image/jpeg', 'image/png', 'image/webp', 'image/avif']
+)
+ON CONFLICT (id) DO UPDATE SET
+  public = EXCLUDED.public,
+  file_size_limit = EXCLUDED.file_size_limit,
+  allowed_mime_types = EXCLUDED.allowed_mime_types;
+
+DROP POLICY IF EXISTS "Public read access for recipe images" ON storage.objects;
+CREATE POLICY "Public read access for recipe images"
+  ON storage.objects FOR SELECT
+  USING (bucket_id = 'recipe-images');
+
+DROP POLICY IF EXISTS "Authenticated users can upload recipe images to their folder" ON storage.objects;
+CREATE POLICY "Authenticated users can upload recipe images to their folder"
+  ON storage.objects FOR INSERT
+  WITH CHECK (
+    bucket_id = 'recipe-images'
+    AND auth.role() = 'authenticated'
+    AND (storage.foldername(name))[1] = auth.uid()::text
+  );
+
+DROP POLICY IF EXISTS "Users can update their own recipe images" ON storage.objects;
+CREATE POLICY "Users can update their own recipe images"
+  ON storage.objects FOR UPDATE
+  USING (
+    bucket_id = 'recipe-images'
+    AND (storage.foldername(name))[1] = auth.uid()::text
+  );
+
+DROP POLICY IF EXISTS "Users can delete their own recipe images" ON storage.objects;
+CREATE POLICY "Users can delete their own recipe images"
+  ON storage.objects FOR DELETE
+  USING (
+    bucket_id = 'recipe-images'
+    AND (storage.foldername(name))[1] = auth.uid()::text
+  );
+

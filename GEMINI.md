@@ -6,16 +6,16 @@
 
 ## 1. Current Project State
 
-- **Current Phase:** **Phase 2 Complete** (Ready to begin **Phase 3: Recipe CRUD Engine, Image Storage & Hybrid Markdown Form**)
+- **Current Phase:** **Phase 3 Complete** (Ready to begin **Phase 4: User Dashboard, Grid/List Views, Filtering & Quick View Modal**)
 - **Active Branch Target:** `dev` (for feature implementation) -> `main` (production CI/CD)
-- **Last Updated:** 2026-11-03
+- **Last Updated:** 2026-11-17
 
 ### Phase Progress Tracker
 
 - [x] **Phase 0: Architecture & Design Documentation** (`PRD.md`, `features.md`, `security.md`, `README.md`, `GEMINI.md`)
-- [x] **Phase 1: Project Foundation, Design System & CI/CD Pipeline** (Next.js 16.4.4 App Router, Tailwind CSS v4 warm theme, Custom SVG Logo, Landing Page, Error/404 boundaries, Prettier 3.5.3, Vitest 5.1.0, GitHub Actions, 0 npm vulnerabilities)
-- [x] **Phase 2: Database Schema, Supabase Auth, Google OIDC & Transactional Emails** (Drizzle ORM schema & SQL RLS migration runner, `@supabase/ssr` HTTP-only cookie `src/proxy.ts`, `/login`, `/register`, `/forgot-password`, `/reset-password`, `/verify-email`, `/auth/callback`, Resend email notifications with CID logo, 20 passing unit tests)
-- [ ] **Phase 3: Recipe CRUD Engine, Image Storage & Hybrid Markdown Form** (`/cookbook/new`, `/cookbook/[recipeId]/edit`, Supabase Storage, Zod validation, sanitized Markdown)
+- [x] **Phase 1: Project Foundation, Design System & CI/CD Pipeline** (Next.js 16.4.6 App Router, Tailwind CSS v4 warm theme, Custom SVG Logo, Landing Page, Error/404 boundaries, Prettier 3.5.3, Vitest 5.1.0, GitHub Actions)
+- [x] **Phase 2: Database Schema, Supabase Auth, Google OIDC & Transactional Emails** (Drizzle ORM schema & SQL RLS migration runner, `@supabase/ssr` HTTP-only cookie `src/proxy.ts`, `/login`, `/register`, `/forgot-password`, `/reset-password`, `/verify-email`, `/auth/callback`, Resend email notifications with CID logo)
+- [x] **Phase 3: Recipe CRUD Engine, Image Storage & Hybrid Markdown Form** (`/cookbook/new`, `/cookbook/[recipeId]`, `/cookbook/[recipeId]/edit`, Supabase Storage `recipe-images` bucket & RLS, Zod validation with SSRF guard, sanitized Markdown via `react-markdown` + `rehype-sanitize`, 28 passing unit tests)
 - [ ] **Phase 4: User Dashboard, Grid/List Views, Filtering & Quick View Modal** (`/dashboard`, `<RecipeCard />`, `<RecipeQuickView />`, Collections & Tags)
 - [ ] **Phase 5: "My Cookbook" Conversation-Style Sidebar & Fullscreen Reader** (`/cookbook` split-pane layout, persistent recipe switcher sidebar, fullscreen cooking toggle)
 - [ ] **Phase 6: Recipe Portability (Export & Import via `.dishionary.json` & Share Links)** (`/cookbook/import`, `/share/[token]`, portable JSON serializer/validator)

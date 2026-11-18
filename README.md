@@ -161,7 +161,7 @@ npm run typecheck
 - [x] **Phase 0: Architecture & Design Documentation** (`PRD.md`, `features.md`, `security.md`, `README.md`, `GEMINI.md`)
 - [x] **Phase 1: Project Foundation, Design System & CI/CD Pipeline** (Next.js App Router, Tailwind CSS v4 warm theme, Custom SVG Logo, Landing Page, Prettier, ESLint, Vitest, GitHub Actions)
 - [x] **Phase 2: Database Schema, Supabase Auth, Google OIDC & Transactional Emails** (Drizzle ORM, RLS policies, `/login`, `/register`, `/forgot-password`, `/reset-password`, `/verify-email`, Resend notifications)
-- [ ] **Phase 3: Recipe CRUD Engine, Image Storage & Hybrid Markdown Form**
+- [x] **Phase 3: Recipe CRUD Engine, Image Storage & Hybrid Markdown Form** (`/cookbook/new`, `/cookbook/[recipeId]`, `/cookbook/[recipeId]/edit`, Supabase Storage `recipe-images` bucket, Zod validation, sanitized Markdown)
 - [ ] **Phase 4: User Dashboard, Grid/List Views, Filtering & Quick View Modal**
 - [ ] **Phase 5: "My Cookbook" Conversation-Style Sidebar & Fullscreen Reader**
 - [ ] **Phase 6: Recipe Portability (Export & Import via `.dishionary.json` & Share Links)**

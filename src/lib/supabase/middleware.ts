@@ -56,7 +56,19 @@ export async function updateSession(request: NextRequest) {
 
   const {
     data: { user },
+    error: authError,
   } = await supabase.auth.getUser();
+
+  // If the browser sent a stale cookie for a deleted user or expired refresh token,
+  // clear all sb-* auth cookies from the response so it won't error on subsequent requests.
+  if (authError) {
+    request.cookies.getAll().forEach(({ name }) => {
+      if (name.startsWith("sb-")) {
+        request.cookies.delete(name);
+        supabaseResponse.cookies.delete(name);
+      }
+    });
+  }
 
   const pathname = request.nextUrl.pathname;
 

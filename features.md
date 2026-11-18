@@ -1,7 +1,7 @@
 # Dishionary — Feature Specifications & User Stories
 
-> **Document Status:** Living Document (v1.2.0 — Phase 2 Complete)  
-> **Last Updated:** 2026-11-03
+> **Document Status:** Living Document (v1.3.0 — Phase 3 Complete)  
+> **Last Updated:** 2026-11-17
 
 ---
 
@@ -174,9 +174,9 @@
 | **F-02**   | Public Landing Page & Responsive App Shell                    | P0       | Phase 1      | **Completed** | Yes          |
 | **F-03**   | Email/Password Auth, Google OIDC & Protected Routes           | P0       | Phase 2      | **Completed** | Yes          |
 | **F-04**   | Email Verification & Password Recovery Flows                  | P0       | Phase 2      | **Completed** | Yes          |
-| **F-05**   | Recipe CRUD (Create, Read, Update, Delete) & DB RLS           | P0       | Phase 3      | Pending       | Yes          |
-| **F-06**   | Hybrid Recipe Form (Structured Inputs + Markdown Editor)      | P0       | Phase 3      | Pending       | Yes          |
-| **F-07**   | Recipe Image Upload (Supabase Storage) & External URL Support | P0       | Phase 3      | Pending       | Yes          |
+| **F-05**   | Recipe CRUD (Create, Read, Update, Delete) & DB RLS           | P0       | Phase 3      | **Completed** | Yes          |
+| **F-06**   | Hybrid Recipe Form (Structured Inputs + Markdown Editor)      | P0       | Phase 3      | **Completed** | Yes          |
+| **F-07**   | Recipe Image Upload (Supabase Storage) & External URL Support | P0       | Phase 3      | **Completed** | Yes          |
 | **F-08**   | Dashboard Grid & List Card Views with Search/Tag Filtering    | P0       | Phase 4      | Pending       | Yes          |
 | **F-09**   | Scrollable Recipe Quick View Drawer/Modal                     | P0       | Phase 4      | Pending       | Yes          |
 | **F-10**   | Collections & Favorites Organization                          | P1       | Phase 4      | Pending       | Yes          |
