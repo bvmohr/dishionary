@@ -24,14 +24,42 @@ export async function updateSession(request: NextRequest) {
     request,
   });
 
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const rawUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const anonKey =
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
     process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
 
-  if (!url || !anonKey) {
+  if (!rawUrl || !anonKey) {
     return supabaseResponse;
   }
+
+  const url = rawUrl.replace(/\/rest\/v1\/?$/, "").replace(/\/$/, "");
+  const pathname = request.nextUrl.pathname;
+  const allCookies = request.cookies.getAll();
+  const hasAuthCookie = allCookies.some(
+    ({ name }) => name.startsWith("sb-") && name.includes("-auth-token")
+  );
+
+  // Skip calling Supabase Auth completely if the visitor has no session cookie
+  if (!hasAuthCookie) {
+    if (isProtectedRoute(pathname)) {
+      const redirectUrl = request.nextUrl.clone();
+      redirectUrl.pathname = "/login";
+      redirectUrl.searchParams.set("next", pathname);
+      return NextResponse.redirect(redirectUrl);
+    }
+    return supabaseResponse;
+  }
+
+  // Helper to purge stale/invalid sb-* auth cookies on any response (including redirects)
+  const clearStaleAuthCookies = (res: NextResponse) => {
+    allCookies.forEach(({ name }) => {
+      if (name.startsWith("sb-")) {
+        request.cookies.delete(name);
+        res.cookies.set(name, "", { path: "/", maxAge: 0 });
+      }
+    });
+  };
 
   const supabase = createServerClient(url, anonKey, {
     cookies: {
@@ -59,25 +87,20 @@ export async function updateSession(request: NextRequest) {
     error: authError,
   } = await supabase.auth.getUser();
 
-  // If the browser sent a stale cookie for a deleted user or expired refresh token,
-  // clear all sb-* auth cookies from the response so it won't error on subsequent requests.
   if (authError) {
-    request.cookies.getAll().forEach(({ name }) => {
-      if (name.startsWith("sb-")) {
-        request.cookies.delete(name);
-        supabaseResponse.cookies.delete(name);
-      }
-    });
+    clearStaleAuthCookies(supabaseResponse);
   }
-
-  const pathname = request.nextUrl.pathname;
 
   // Redirect unauthenticated visitors trying to access protected routes to /login
   if (!user && isProtectedRoute(pathname)) {
     const redirectUrl = request.nextUrl.clone();
     redirectUrl.pathname = "/login";
     redirectUrl.searchParams.set("next", pathname);
-    return NextResponse.redirect(redirectUrl);
+    const redirectResponse = NextResponse.redirect(redirectUrl);
+    if (authError) {
+      clearStaleAuthCookies(redirectResponse);
+    }
+    return redirectResponse;
   }
 
   // Redirect authenticated users away from /login or /register to /dashboard

@@ -1,24 +1,43 @@
 "use client";
 
 import * as React from "react";
-import { signInWithGoogleAction } from "@/app/actions/auth";
+import { createClient } from "@/lib/supabase/client";
 
 export function GoogleOidcButton({
   label = "Continue with Google",
 }: {
   label?: string;
 }) {
-  const [isPending, startTransition] = React.useTransition();
+  const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
 
-  const handleGoogleSignIn = () => {
+  const handleGoogleSignIn = async () => {
     setError(null);
-    startTransition(async () => {
-      const result = await signInWithGoogleAction();
-      if (result?.error) {
-        setError(result.error);
+    setIsLoading(true);
+
+    try {
+      const supabase = createClient();
+      const redirectTo = `${window.location.origin}/auth/callback?next=/dashboard`;
+
+      const { error: oauthError } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+          redirectTo,
+        },
+      });
+
+      if (oauthError) {
+        setError(oauthError.message);
+        setIsLoading(false);
       }
-    });
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Unable to initiate Google sign-in."
+      );
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -26,7 +45,7 @@ export function GoogleOidcButton({
       <button
         type="button"
         onClick={handleGoogleSignIn}
-        disabled={isPending}
+        disabled={isLoading}
         className="inline-flex w-full items-center justify-center gap-2.5 rounded-lg border border-border bg-surface px-4 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-surface-muted disabled:cursor-not-allowed disabled:opacity-60"
       >
         <svg
@@ -51,7 +70,7 @@ export function GoogleOidcButton({
             fill="#EA4335"
           />
         </svg>
-        <span>{isPending ? "Connecting to Google..." : label}</span>
+        <span>{isLoading ? "Connecting to Google..." : label}</span>
       </button>
 
       {error && (
