@@ -42,12 +42,22 @@ export async function GET(request: Request) {
         }
       }
 
-      // Send welcome confirmation email on initial verification
-      if (user.email && safeNext === "/dashboard") {
+      // Send welcome confirmation email strictly once on initial account creation/verification
+      const alreadySentWelcome = Boolean(
+        user.user_metadata?.welcome_email_sent
+      );
+
+      if (user.email && safeNext === "/dashboard" && !alreadySentWelcome) {
         await sendAccountNotificationEmail({
           to: user.email,
           displayName,
           type: "welcome_verified",
+        });
+
+        await supabase.auth.updateUser({
+          data: {
+            welcome_email_sent: true,
+          },
         });
       }
 
